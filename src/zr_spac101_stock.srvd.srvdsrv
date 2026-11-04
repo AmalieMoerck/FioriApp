@@ -1,0 +1,7 @@
+@EndUserText.label: 'service definition'
+
+define service ZR_SPAC101_STOCK { 
+  expose ZR_SPAC101_STOCK as StockData;
+  
+  }
+

@@ -1,10 +1,13 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
-@EndUserText.label: 'projection view'
+@EndUserText.label: 'Projection View for Stock'
 @Metadata.ignorePropagatedAnnotations: true
-define root view entity ZC_SPAC101_STOCK
-  provider contract transactional_query as projection on ZR_SPAC101_STOCK
+define view entity ZC_SPAC101_STOCK as projection on ZR_SPAC101_STOCK
 {
   key WarehouseId,
   key ProductId,
-  Amount
+  Amount,
+  
+  ProductName,
+  
+  _Warehouse : redirected to parent ZC_SPAC101_WRHOUSE
 }

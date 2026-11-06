@@ -1,7 +1,7 @@
 projection;
 strict ( 2 );
 
-define behavior for ZC_SPAC101_STOCK
+define behavior for ZC_SPAC101_WRHOUSE //alias <alias_name>
 {
   use create;
   use update;

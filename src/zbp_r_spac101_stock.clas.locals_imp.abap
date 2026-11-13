@@ -11,10 +11,39 @@ ENDCLASS.
 
 CLASS lhc_STOCK IMPLEMENTATION.
 
-  METHOD get_instance_authorizations.
+  METHOD get_global_authorizations.
+    IF requested_authorizations-%create = if_abap_behv=>mk-on.
+      result-%create = if_abap_behv=>auth-allowed.
+    ENDIF.
+    IF requested_authorizations-%update = if_abap_behv=>mk-on.
+      result-%update = if_abap_behv=>auth-allowed.
+    ENDIF.
+    IF requested_authorizations-%delete = if_abap_behv=>mk-on.
+      result-%delete = if_abap_behv=>auth-allowed.
+    ENDIF.
   ENDMETHOD.
 
-  METHOD get_global_authorizations.
+  METHOD get_instance_authorizations.
+    READ ENTITIES OF zr_spac101_stock IN LOCAL MODE
+      ENTITY stock
+        ALL FIELDS WITH CORRESPONDING #( keys )
+      RESULT DATA(lt_stocks).
+
+    LOOP AT lt_stocks INTO DATA(ls_stock).
+      APPEND VALUE #(
+        %tky    = ls_stock-%tky
+        %update = if_abap_behv=>auth-allowed
+        %delete = if_abap_behv=>auth-allowed
+      ) TO result.
+    ENDLOOP.
   ENDMETHOD.
+
+
+
+*  METHOD get_instance_authorizations.
+*  ENDMETHOD.
+*
+*  METHOD get_global_authorizations.
+*  ENDMETHOD.
 
 ENDCLASS.

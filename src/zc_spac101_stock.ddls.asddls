@@ -14,15 +14,17 @@ provider contract transactional_query as projection on ZR_SPAC101_STOCK
 
 
   @EndUserText.label: 'Warehouse ID'
+  @UI.lineItem: [{position: 10}]
   @UI.identification: [{ position: 10 }]
   key WarehouseId,
 
   @EndUserText.label: 'Product ID'
+  @UI.lineItem: [{position: 20}]
   @UI.identification: [{ position: 20 }]
   key ProductId,
 
   @EndUserText.label: 'Amount'
-  @UI.lineItem: [{ position: 60 }]
+  @UI.lineItem: [{ position: 30 }]
   @UI.identification: [{ position: 30 }]
   Amount,
 
@@ -32,34 +34,35 @@ provider contract transactional_query as projection on ZR_SPAC101_STOCK
   LocalLastChangedAt,
 
   @EndUserText.label: 'Product Name'
-  @UI.lineItem: [{ position: 10 }]
+  @UI.lineItem: [{ position: 40 }]
   @UI.identification: [{ position: 40 }]
   ProductName,
 
   @EndUserText.label: 'Product Description'
-  @UI.lineItem: [{ position: 20 }]
+  @UI.lineItem: [{ position: 50 }]
   @UI.identification: [{ position: 50 }]
   ProductDescription,
 
   @EndUserText.label: 'Price'
+  @UI.lineItem: [{ position: 60 }]
   @Semantics.amount.currencyCode : 'Currency'
   ProductPrice,
   Currency,
   
   @EndUserText.label: 'Warehouse Name'
-  @UI.lineItem: [{ position: 30 }]
-  @UI.identification: [{ position: 60 }]
+  @UI.lineItem: [{ position: 70 }]
+  @UI.identification: [{ position: 70 }]
   WarehouseName,
 
   @EndUserText.label: 'Address'
   WarehouseAdress,
 
   @EndUserText.label: 'City'
-  @UI.lineItem: [{ position: 40 }]
+  @UI.lineItem: [{ position: 80 }]
   _Warehouse.WarehouseCity as WarehouseCity,
 
   @EndUserText.label: 'Post code'
-  @UI.lineItem: [{ position: 50 }]
+  @UI.lineItem: [{ position: 90 }]
   WarehousePostcode,
        
   _Warehouse,

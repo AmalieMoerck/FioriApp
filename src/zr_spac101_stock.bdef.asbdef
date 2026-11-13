@@ -21,10 +21,13 @@ etag master LocalLastChangedAt
   draft determine action Prepare;
 
 
-  field ( readonly : update ) WarehouseId, ProductId, ProductName, ProductDescription, ProductPrice;
+  field ( readonly : update ) WarehouseId, ProductId;
 
 
   field ( readonly )
+                     ProductName,
+                     ProductDescription,
+                     ProductPrice,
                      WarehouseName,
                      WarehouseAdress,
                      WarehouseCity,

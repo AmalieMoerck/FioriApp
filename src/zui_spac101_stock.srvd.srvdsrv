@@ -1,0 +1,4 @@
+@EndUserText.label: 'service definition'
+define service ZUI_SPAC101_STOCK {
+  expose ZC_SPAC101_STOCK;
+}

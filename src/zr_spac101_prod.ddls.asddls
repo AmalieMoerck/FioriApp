@@ -1,14 +1,13 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
-@EndUserText.label: 'Product table'
+@EndUserText.label: 'Product data definition'
 @Metadata.ignorePropagatedAnnotations: true
-define root view entity ZR_SPAC101_PROD as select from zspac101_prod
-//composition of target_data_source_name as _association_name
+define view entity ZR_SPAC101_PROD as select from zspac101_prod
+
 {
   key product_id as ProductId,
-  key product_name as ProductName,
+  product_name as ProductName,
   product_description as ProductDescription,
-  @Semantics.amount.currencyCode: 'Currency'
+  @Semantics.amount.currencyCode : 'Currency'
   product_price as ProductPrice,
   currency as Currency
-  //_association_name // Make association public
 }

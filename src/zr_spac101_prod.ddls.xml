@@ -5,7 +5,7 @@
    <DDLS>
     <DDLNAME>ZR_SPAC101_PROD</DDLNAME>
     <DDLANGUAGE>E</DDLANGUAGE>
-    <DDTEXT>Product table</DDTEXT>
+    <DDTEXT>Product data definition</DDTEXT>
     <SOURCE_TYPE>W</SOURCE_TYPE>
    </DDLS>
   </asx:values>

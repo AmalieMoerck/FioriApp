@@ -12,8 +12,12 @@ ENDCLASS.
 
 CLASS zcl_spac101_new_test_class IMPLEMENTATION.
 
+
 METHOD if_oo_adt_classrun~main.
 
+
+    CONSTANTS c_carrier_id TYPE /dmo/carrier_id       VALUE '0'.
+    CONSTANTS c_connection_id TYPE /dmo/connection_id VALUE '0'.
 
 
    DATA connection  TYPE REF TO lcl_connection.
@@ -28,29 +32,6 @@ METHOD if_oo_adt_classrun~main.
       EXPORTING
         i_carrier_id    = 'LH'
         i_connection_id = '0400'
-
-
-    ).
-
-    APPEND connection TO connections.
-
-
-    connection = NEW #(  ).
-
-    connection->set_attributes(
-      EXPORTING
-        i_carrier_id    = 'AA'
-        i_connection_id = '0017'
-    ).
-
-    APPEND connection TO connections.
-
-    connection = NEW #(  ).
-    connection->set_attributes(
-      EXPORTING
-        i_carrier_id    = 'SQ'
-        i_connection_id = '0001'
-
     ).
 
     APPEND connection TO connections.
@@ -73,10 +54,5 @@ METHOD if_oo_adt_classrun~main.
                   name = `  ` ).
 
     ENDIF.
-
-
 ENDMETHOD.
-
 ENDCLASS.
-
-

@@ -2,6 +2,7 @@
 *"* local helper classes, interface definitions and type
 *"* declarations
 
+
 CLASS lcl_connection DEFINITION.
   PUBLIC SECTION.
 
@@ -43,5 +44,3 @@ CLASS lcl_connection IMPLEMENTATION.
   ENDMETHOD.
 
 ENDCLASS.
-
-

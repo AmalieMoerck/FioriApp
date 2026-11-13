@@ -1,16 +1,67 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Interface view for stock'
 @Metadata.ignorePropagatedAnnotations: true
-define view entity ZR_SPAC101_STOCK as select from zspac101_stock
-association to parent ZR_SPAC101_WRHOUSE as _Warehouse on $projection.WarehouseId = _Warehouse.WarehouseId
+define root view entity ZR_SPAC101_STOCK as select from zspac101_stock
+association [1..1] to ZR_SPAC101_WRHOUSE as _Warehouse on $projection.WarehouseId = _Warehouse.WarehouseId
 association [1..1] to ZR_SPAC101_PROD as _Product on $projection.ProductId = _Product.ProductId
+
 {
+
+  @UI.facet: [ { id: 'StockDetails',
+                 purpose: #STANDARD,
+                 type: #IDENTIFICATION_REFERENCE,
+                 label: 'Stock Details',
+                 position: 10 } ]
+
+
+  @EndUserText.label: 'Warehouse ID'
+  @UI.identification: [{ position: 10 }]
   key warehouse_id as WarehouseId,
+
+  @EndUserText.label: 'Product ID'
+  @UI.identification: [{ position: 20 }]
   key product_id as ProductId,
+
+  @EndUserText.label: 'Amount'
+  @UI.lineItem: [{ position: 60 }]
+  @UI.identification: [{ position: 30 }]
   amount as Amount,
-  
+
+  local_created_by as CreatedBy,
+  local_created_at as CreatedAt,
+  last_changed_at as LastChangedAt,
+  local_last_changed_at as LocalLastChangedAt,
+
+  @EndUserText.label: 'Product Name'
+  @UI.lineItem: [{ position: 10 }]
+  @UI.identification: [{ position: 40 }]
   _Product.ProductName as ProductName,
+
+  @EndUserText.label: 'Product Description'
+  @UI.lineItem: [{ position: 20 }]
+  _Product.ProductDescription as ProductDescription,
+
+  @EndUserText.label: 'Price'
+  @Semantics.amount.currencyCode : 'Currency'
+  _Product.ProductPrice as ProductPrice,
+  _Product.Currency as Currency,
   
+  @EndUserText.label: 'Warehouse Name'
+  @UI.lineItem: [{ position: 30 }]
+  @UI.identification: [{ position: 50 }]
+  _Warehouse.WarehouseName as WarehouseName,
+
+  @EndUserText.label: 'Address'
+  _Warehouse.WarehouseAdress as WarehouseAdress,
+
+  @EndUserText.label: 'City'
+  @UI.lineItem: [{ position: 40 }]
+  _Warehouse.WarehouseCity as WarehouseCity,
+
+  @EndUserText.label: 'Post code'
+  @UI.lineItem: [{ position: 50 }]
+  _Warehouse.WarehousePostcode as WarehousePostcode,
+       
   _Warehouse,
   _Product
 }

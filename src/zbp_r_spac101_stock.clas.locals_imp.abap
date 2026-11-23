@@ -9,9 +9,6 @@ CLASS lhc_STOCK DEFINITION INHERITING FROM cl_abap_behavior_handler.
     METHODS precheck_create FOR PRECHECK
       IMPORTING entities FOR CREATE stock.
 
-*    METHODS validateproductid FOR VALIDATE ON SAVE
-*      keys FOR stock~validateproductid.
-
     METHODS validateAmount FOR VALIDATE ON SAVE
       keys FOR stock~validateAmount.
 

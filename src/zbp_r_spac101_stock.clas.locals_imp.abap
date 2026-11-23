@@ -6,8 +6,11 @@ CLASS lhc_STOCK DEFINITION INHERITING FROM cl_abap_behavior_handler.
 
     METHODS get_global_authorizations FOR GLOBAL AUTHORIZATION
       REQUEST requested_authorizations FOR stock RESULT result.
-    METHODS validateproductid FOR VALIDATE ON SAVE
-      keys FOR stock~validateproductid.
+    METHODS precheck_create FOR PRECHECK
+      IMPORTING entities FOR CREATE stock.
+
+*    METHODS validateproductid FOR VALIDATE ON SAVE
+*      keys FOR stock~validateproductid.
 
     METHODS validateAmount FOR VALIDATE ON SAVE
       keys FOR stock~validateAmount.
@@ -44,38 +47,24 @@ CLASS lhc_STOCK IMPLEMENTATION.
   ENDMETHOD.
 
 
+  METHOD precheck_create.
+    LOOP AT entities ASSIGNING FIELD-SYMBOL(<entity>).
 
-*  METHOD get_instance_authorizations.
-*  ENDMETHOD.
-*
-*  METHOD get_global_authorizations.
-*  ENDMETHOD.
+      SELECT SINGLE @abap_true
+        FROM zspac101_stock
+        WHERE warehouse_id = @<entity>-WarehouseId
+          AND product_id = @<entity>-ProductId
+        INTO @DATA(lv_exsists).
+     IF sy-subrc = 0.
 
-  METHOD validateProductId.
-  READ ENTITIES OF ZR_SPAC101_STOCK IN LOCAL MODE
-    ENTITY Stock
-    FIELDS ( WarehouseId ProductId )
-    WITH CORRESPONDING #( keys )
-    RESULT DATA(lt_stock).
-
-  LOOP AT lt_stock ASSIGNING FIELD-SYMBOL(<stock>).
-
-    SELECT SINGLE @abap_true
-      FROM zspac101_stock
-      WHERE warehouse_id = @<stock>-WarehouseId
-        AND product_id = @<stock>-ProductId
-      INTO @DATA(lv_warehouse_id).
-
-    IF sy-subrc = 0.
-
-      APPEND VALUE #( %tky = <stock>-%tky )
+            APPEND VALUE #( %cid = <entity>-%cid )
         TO failed-stock.
 
       APPEND VALUE #(
-        %tky = <stock>-%tky
+        %cid = <entity>-%cid
         %msg = new_message_with_text(
           severity = if_abap_behv_message=>severity-error
-          text = 'This product already exists in the selected warehouse.'
+          text = 'A stock entry for this product already exsists in the selected warehouse.'
         )
       ) TO reported-stock.
 
@@ -83,6 +72,40 @@ CLASS lhc_STOCK IMPLEMENTATION.
 
   ENDLOOP.
   ENDMETHOD.
+
+*
+*  METHOD validateProductId.
+*  READ ENTITIES OF ZR_SPAC101_STOCK IN LOCAL MODE
+*    ENTITY Stock
+*    FIELDS ( WarehouseId ProductId )
+*    WITH CORRESPONDING #( keys )
+*    RESULT DATA(lt_stock).
+*
+*  LOOP AT lt_stock ASSIGNING FIELD-SYMBOL(<stock>).
+*
+*    SELECT SINGLE @abap_true
+*      FROM zspac101_stock
+*      WHERE warehouse_id = @<stock>-WarehouseId
+*        AND product_id = @<stock>-ProductId
+*      INTO @DATA(lv_warehouse_id).
+*
+*    IF sy-subrc = 0.
+*
+*      APPEND VALUE #( %tky = <stock>-%tky )
+*        TO failed-stock.
+*
+*      APPEND VALUE #(
+*        %tky = <stock>-%tky
+*        %msg = new_message_with_text(
+*          severity = if_abap_behv_message=>severity-error
+*          text = 'Product already exists in this warehouse.'
+*        )
+*      ) TO reported-stock.
+*
+*    ENDIF.
+
+*  ENDLOOP.
+*  ENDMETHOD.
   METHOD validateAmount.
   READ ENTITIES OF ZR_SPAC101_STOCK IN LOCAL MODE
     ENTITY Stock
@@ -93,10 +116,6 @@ CLASS lhc_STOCK IMPLEMENTATION.
   LOOP AT lt_stock ASSIGNING FIELD-SYMBOL(<stock>).
 
     IF <stock>-amount < 0.
-
-      APPEND VALUE #( %tky = <stock>-%tky )
-        TO failed-stock.
-
 
       APPEND VALUE #( %tky = <stock>-%tky )
         TO failed-stock.

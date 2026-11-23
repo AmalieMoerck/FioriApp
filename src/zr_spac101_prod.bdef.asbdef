@@ -8,10 +8,12 @@ draft table zspac101_prod_d
 lock master total etag LastChangedAt
 authorization master ( global, instance )
 etag master LocalLastChangedAt
+with additional save
 {
   create;
   update;
-  delete;
+  delete ( features : instance );
+
 
   draft action Edit;
   draft action Activate optimized;

@@ -15,10 +15,10 @@ define root view entity ZC_SPAC101_WRHOUSE
 {
   @UI.facet: [
     {
-      id: 'ProductDetails',
+      id: 'WarehouseDetails',
       purpose: #STANDARD,
       type: #IDENTIFICATION_REFERENCE,
-      label: 'Produktdetaljer',
+      label: 'Lager Detaljer',
       position: 10
     }
   ]

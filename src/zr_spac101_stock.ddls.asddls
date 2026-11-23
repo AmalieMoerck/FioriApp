@@ -1,5 +1,6 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Interface view for stock'
+@ObjectModel.resultSet.sizeCategory: #XS
 @Metadata.ignorePropagatedAnnotations: true
 
 
@@ -7,11 +8,11 @@ define root view entity ZR_SPAC101_STOCK as select from zspac101_stock
 association [0..1] to ZR_SPAC101_WRHOUSE as _Warehouse on $projection.WarehouseId = _Warehouse.WarehouseId
 association [0..1] to ZR_SPAC101_PROD as _Product on $projection.ProductId = _Product.ProductId
 
+
 {
 
-
-  key warehouse_id as WarehouseId,
-
+  @ObjectModel.text.element: ['WarehouseName']
+  key warehouse_id   as WarehouseId,
 
   key product_id as ProductId,
 

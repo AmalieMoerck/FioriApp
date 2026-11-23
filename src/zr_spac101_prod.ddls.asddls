@@ -1,9 +1,11 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Product data definition'
+@ObjectModel.resultSet.sizeCategory: #XS
 @Metadata.ignorePropagatedAnnotations: true
 define root view entity ZR_SPAC101_PROD as select from zspac101_prod
 
 {
+  @ObjectModel.text.element: ['ProductName']
   key product_id as ProductId,
   product_name as ProductName,
   product_description as ProductDescription,

@@ -1,6 +1,15 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Projection View for Stock'
 @Metadata.ignorePropagatedAnnotations: true
+@Metadata.allowExtensions: true
+@UI: {
+  headerInfo: {
+    typeName: 'Inventar',
+    typeNamePlural: 'Inventar',
+    title: { type: #STANDARD, value: 'ProductName' },
+    description: { type: #STANDARD, value: 'ProductId' }
+  }
+}
 define root view entity ZC_SPAC101_STOCK 
 provider contract transactional_query as projection on ZR_SPAC101_STOCK
 {
@@ -9,18 +18,20 @@ provider contract transactional_query as projection on ZR_SPAC101_STOCK
   { id: 'StockDetails',
   purpose: #STANDARD,
   type: #IDENTIFICATION_REFERENCE,
-  label: 'Stock Details',
+  label: 'Inventar detaljer',
   position: 10 } ]
 
 
   @EndUserText.label: 'Warehouse ID'
   @UI.lineItem: [{position: 10}]
   @UI.identification: [{ position: 10 }]
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZR_SPAC101_WRHOUSE', element: 'WarehouseId' } }]
   key WarehouseId,
 
   @EndUserText.label: 'Product ID'
   @UI.lineItem: [{position: 20}]
   @UI.identification: [{ position: 20 }]
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZR_SPAC101_PROD', element: 'ProductId' } }]
   key ProductId,
 
   @EndUserText.label: 'Amount'
@@ -36,6 +47,7 @@ provider contract transactional_query as projection on ZR_SPAC101_STOCK
   @EndUserText.label: 'Product Name'
   @UI.lineItem: [{ position: 40 }]
   @UI.identification: [{ position: 40 }]
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZR_SPAC101_PROD', element: 'ProductName' } }]
   ProductName,
 
   @EndUserText.label: 'Product Description'
@@ -52,6 +64,7 @@ provider contract transactional_query as projection on ZR_SPAC101_STOCK
   @EndUserText.label: 'Warehouse Name'
   @UI.lineItem: [{ position: 70 }]
   @UI.identification: [{ position: 70 }]
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZR_SPAC101_WRHOUSE', element: 'WarehouseName' } }]
   WarehouseName,
 
   @EndUserText.label: 'Address'
@@ -93,3 +106,5 @@ provider contract transactional_query as projection on ZR_SPAC101_STOCK
 //  _Product,
 //  _Warehouse
 //}
+
+

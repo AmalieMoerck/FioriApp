@@ -14,4 +14,7 @@ define behavior for ZC_SPAC101_STOCK alias Stock
   use action Resume;
   use action Prepare;
 
+//  use validation validateProductId;
+//  use validation validateAmount;
+
 }

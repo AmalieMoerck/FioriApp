@@ -6,6 +6,11 @@ CLASS lhc_STOCK DEFINITION INHERITING FROM cl_abap_behavior_handler.
 
     METHODS get_global_authorizations FOR GLOBAL AUTHORIZATION
       REQUEST requested_authorizations FOR stock RESULT result.
+    METHODS validateproductid FOR VALIDATE ON SAVE
+      keys FOR stock~validateproductid.
+
+    METHODS validateAmount FOR VALIDATE ON SAVE
+      keys FOR stock~validateAmount.
 
 ENDCLASS.
 
@@ -45,5 +50,70 @@ CLASS lhc_STOCK IMPLEMENTATION.
 *
 *  METHOD get_global_authorizations.
 *  ENDMETHOD.
+
+  METHOD validateProductId.
+  READ ENTITIES OF ZR_SPAC101_STOCK IN LOCAL MODE
+    ENTITY Stock
+    FIELDS ( WarehouseId ProductId )
+    WITH CORRESPONDING #( keys )
+    RESULT DATA(lt_stock).
+
+  LOOP AT lt_stock ASSIGNING FIELD-SYMBOL(<stock>).
+
+    SELECT SINGLE @abap_true
+      FROM zspac101_stock
+      WHERE warehouse_id = @<stock>-WarehouseId
+        AND product_id = @<stock>-ProductId
+      INTO @DATA(lv_warehouse_id).
+
+    IF sy-subrc = 0.
+
+      APPEND VALUE #( %tky = <stock>-%tky )
+        TO failed-stock.
+
+      APPEND VALUE #(
+        %tky = <stock>-%tky
+        %msg = new_message_with_text(
+          severity = if_abap_behv_message=>severity-error
+          text = 'This product already exists in the selected warehouse.'
+        )
+      ) TO reported-stock.
+
+    ENDIF.
+
+  ENDLOOP.
+  ENDMETHOD.
+  METHOD validateAmount.
+  READ ENTITIES OF ZR_SPAC101_STOCK IN LOCAL MODE
+    ENTITY Stock
+    FIELDS ( Amount )
+    WITH CORRESPONDING #( keys )
+    RESULT DATA(lt_stock).
+
+  LOOP AT lt_stock ASSIGNING FIELD-SYMBOL(<stock>).
+
+    IF <stock>-amount < 0.
+
+      APPEND VALUE #( %tky = <stock>-%tky )
+        TO failed-stock.
+
+
+      APPEND VALUE #( %tky = <stock>-%tky )
+        TO failed-stock.
+
+      APPEND VALUE #(
+        %tky = <stock>-%tky
+        %msg = new_message_with_text(
+          severity = if_abap_behv_message=>severity-error
+          text = 'Amount cannot be Negative.'
+        )
+      ) TO reported-stock.
+
+    ENDIF.
+
+  ENDLOOP.
+  ENDMETHOD.
+
+
 
 ENDCLASS.

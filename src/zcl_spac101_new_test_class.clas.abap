@@ -10,7 +10,8 @@ CLASS zcl_spac101_new_test_class DEFINITION
 ENDCLASS.
 
 
-CLASS zcl_spac101_new_test_class IMPLEMENTATION.
+
+CLASS ZCL_SPAC101_NEW_TEST_CLASS IMPLEMENTATION.
 
 
 METHOD if_oo_adt_classrun~main.

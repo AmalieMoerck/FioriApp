@@ -18,7 +18,9 @@ CLASS zcl_spac101_new_data_loader DEFINITION
 ENDCLASS.
 
 
-CLASS zcl_spac101_new_data_loader IMPLEMENTATION.
+
+CLASS ZCL_SPAC101_NEW_DATA_LOADER IMPLEMENTATION.
+
 
   METHOD if_oo_adt_classrun~main.
 
@@ -152,5 +154,4 @@ CLASS zcl_spac101_new_data_loader IMPLEMENTATION.
 
     r_output = |Cleanup completed. Deleted { lv_deleted_prod } products and { lv_deleted_wrhouse } warehouses and { lv_deleted_stock } stock.|.
   ENDMETHOD.
-
 ENDCLASS.

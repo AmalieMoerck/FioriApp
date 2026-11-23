@@ -18,7 +18,9 @@ CLASS zcl_SPAC101_data_loader DEFINITION
 ENDCLASS.
 
 
-CLASS zcl_SPAC101_data_loader IMPLEMENTATION.
+
+CLASS ZCL_SPAC101_DATA_LOADER IMPLEMENTATION.
+
 
   METHOD if_oo_adt_classrun~main.
 
@@ -74,6 +76,7 @@ CLASS zcl_SPAC101_data_loader IMPLEMENTATION.
     r_output = |Inserted { sy-dbcnt } entries into table.|.
 
   ENDMETHOD.
+
 
   METHOD cleanup.
 

@@ -11,7 +11,8 @@ ENDCLASS.
 
 
 
-CLASS zcl_spac101_new_test_table IMPLEMENTATION.
+CLASS ZCL_SPAC101_NEW_TEST_TABLE IMPLEMENTATION.
+
 
 METHOD if_oo_adt_classrun~main.
 

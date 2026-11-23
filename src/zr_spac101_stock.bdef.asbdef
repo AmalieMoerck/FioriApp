@@ -14,12 +14,15 @@ etag master LocalLastChangedAt
   update;
   delete;
 
+
+  validation validateProductId on save { create; field ProductId;}
+  validation validateAmount on save { create; update; }
+
   draft action Edit;
   draft action Activate optimized;
   draft action Discard;
   draft action Resume;
-  draft determine action Prepare;
-
+  draft determine action Prepare{validation validateProductId;}
 
   field ( readonly : update ) WarehouseId, ProductId;
 

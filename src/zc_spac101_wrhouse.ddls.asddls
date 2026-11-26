@@ -18,33 +18,33 @@ define root view entity ZC_SPAC101_WRHOUSE
       id: 'WarehouseDetails',
       purpose: #STANDARD,
       type: #IDENTIFICATION_REFERENCE,
-      label: 'Lager Detaljer',
+      label: 'Warehouse Details',
       position: 10
     }
   ]
   @EndUserText.label: 'Warehouse ID'
-  @UI.lineItem: [ { position: 10, label: 'Lager-ID' } ]
-  @UI.identification: [ { position: 10, label: 'Lager-ID' } ]
+  @UI.lineItem: [ { position: 10, label: 'Warehouse ID' } ]
+  @UI.identification: [ { position: 10, label: 'Warehouse ID' } ]
   key WarehouseId,
 
-  @EndUserText.label: 'Warehouse Name'
-  @UI.lineItem: [ { position: 20, label: 'Lager navn' } ]
-  @UI.identification: [ { position: 20, label: 'Lager navn' } ]
+  @EndUserText.label: 'Name'
+  @UI.lineItem: [ { position: 20, label: 'Name' } ]
+  @UI.identification: [ { position: 20, label: 'Name' } ]
   WarehouseName,
 
-  @EndUserText.label: 'Warehouse Address'
-  @UI.lineItem: [ { position: 30, label: 'Lager adresse' } ]
-  @UI.identification: [ { position: 30, label: 'Lager Adresse' } ]
+  @EndUserText.label: 'Address'
+  @UI.lineItem: [ { position: 30, label: 'Address' } ]
+  @UI.identification: [ { position: 30, label: 'Address' } ]
   WarehouseAdress,
 
-  @EndUserText.label: 'Warehouse City'
-  @UI.lineItem: [ { position: 40, label: 'By' } ]
-  @UI.identification: [ { position: 40, label: 'By' } ]
+  @EndUserText.label: 'City'
+  @UI.lineItem: [ { position: 40, label: 'City' } ]
+  @UI.identification: [ { position: 40, label: 'City' } ]
   WarehouseCity,
 
-  @EndUserText.label: 'Warehouse Postcode'
-  @UI.lineItem: [ { position: 50, label: 'Postnummer' } ]
-  @UI.identification: [ { position: 50, label: 'Postnummer' } ]
+  @EndUserText.label: 'Postcode'
+  @UI.lineItem: [ { position: 50, label: 'Postcode' } ]
+  @UI.identification: [ { position: 50, label: 'Postcode' } ]
   WarehousePostcode
 }
 

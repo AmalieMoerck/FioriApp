@@ -10,6 +10,7 @@ CLASS lhc_Product DEFINITION INHERITING FROM cl_abap_behavior_handler.
     METHODS get_instance_features FOR INSTANCE FEATURES
       keys REQUEST requested_features FOR Product RESULT result.
 
+
 ENDCLASS.
 
 CLASS lhc_Product IMPLEMENTATION.
